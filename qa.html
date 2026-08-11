@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Black Souls 2 伴侣测试 · 在线测评</title>
+  <meta name="description" content="28 道选择题，从 12 位角色中测出与你最契合的 Black Souls 2 灵魂伴侣。" />
+  <link rel="stylesheet" href="style.css?v=20260811-4" />
+</head>
+<body>
+  <div class="bg" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <main class="container">
+    <section id="screen-start" class="screen active">
+      <div class="badge">BLACK SOULS II · 伴侣测试</div>
+      <h1 class="hero-title">谁是你的<span class="grad-text">灵魂伴侣</span>？</h1>
+      <p class="hero-sub">28 道选择题 · 约 3 分钟 · 从 12 位角色中测出与你最契合的那位</p>
+
+      <div class="char-grid" id="roster"></div>
+
+      <div style="text-align:center">
+        <button class="btn btn-primary btn-lg" id="btn-start">开始测试</button>
+      </div>
+      <p class="disclaimer">结果仅供娱乐参考，并非专业测评</p>
+    </section>
+
+    <section id="screen-test" class="screen">
+      <div class="test-top">
+        <span class="dim-tag">BLACK SOULS II</span>
+        <span class="counter" id="q-counter">1 / 28</span>
+      </div>
+      <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="question-card">
+        <p class="question-text" id="q-text"></p>
+        <div class="options" id="options"></div>
+      </div>
+      <div class="test-nav">
+        <button class="btn btn-ghost" id="btn-prev">上一题</button>
+        <button class="btn btn-ghost" id="btn-next">下一题</button>
+      </div>
+    </section>
+
+    <section id="screen-result" class="screen">
+      <div class="result-hero" id="result-hero">
+        <div class="result-avatar" id="result-avatar">诺</div>
+        <div class="result-label">你的灵魂伴侣</div>
+        <div class="result-name" id="result-name">诺登</div>
+        <p class="result-tagline" id="result-tagline"></p>
+      </div>
+
+      <div class="result-section">
+        <h3>契合度分析</h3>
+        <div id="char-bars"></div>
+      </div>
+
+      <div class="result-section">
+        <h3>性格特点</h3>
+        <ul class="traits" id="traits"></ul>
+      </div>
+
+      <div class="result-actions">
+        <button class="btn btn-primary" id="btn-copy">复制结果</button>
+        <button class="btn btn-ghost" id="btn-restart">重新测试</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="data.js?v=20260811-4"></script>
+  <script src="app.js?v=20260811-4"></script>
+  <script>
+    startTest();
+  </script>
+</body>
+</html>
