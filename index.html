@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MBTI 人格测试 · 在线测评</title>
+  <meta name="description" content="基于 MBTI 理论的 28 题在线人格测试，从四个维度测出你的 16 型人格。" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <main class="container">
+    <!-- 首页 -->
+    <section id="screen-start" class="screen active">
+      <div class="badge">MBTI · 16 型人格</div>
+      <h1 class="hero-title">你是哪一种<span class="grad-text">人格</span>？</h1>
+      <p class="hero-sub">28 道选择题 · 约 5 分钟 · 从四个维度探索你的性格倾向</p>
+
+      <div class="dim-grid">
+        <div class="dim-card"><div class="dim-pair" style="color:#f59e0b">E / I</div><div class="dim-name">能量来源</div></div>
+        <div class="dim-card"><div class="dim-pair" style="color:#8b5cf6">S / N</div><div class="dim-name">认知方式</div></div>
+        <div class="dim-card"><div class="dim-pair" style="color:#ec4899">T / F</div><div class="dim-name">决策方式</div></div>
+        <div class="dim-card"><div class="dim-pair" style="color:#14b8a6">J / P</div><div class="dim-name">生活方式</div></div>
+      </div>
+
+      <div style="text-align:center">
+        <button class="btn btn-primary btn-lg" id="btn-start">开始测试</button>
+      </div>
+      <p class="disclaimer">结果仅供自我探索与娱乐参考，并非专业心理测评</p>
+    </section>
+
+    <!-- 测试页 -->
+    <section id="screen-test" class="screen">
+      <div class="test-top">
+        <span class="dim-tag" id="q-dim">E / I</span>
+        <span class="counter" id="q-counter">1 / 28</span>
+      </div>
+      <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="question-card">
+        <p class="question-text" id="q-text"></p>
+        <div class="options" id="options"></div>
+      </div>
+      <div class="test-nav">
+        <button class="btn btn-ghost" id="btn-prev">上一题</button>
+        <button class="btn btn-ghost" id="btn-next">下一题</button>
+      </div>
+    </section>
+
+    <!-- 结果页 -->
+    <section id="screen-result" class="screen">
+      <div class="result-hero" id="result-hero">
+        <div class="result-letters" id="result-letters"></div>
+        <div class="result-name" id="result-name">调停者</div>
+        <div class="result-en" id="result-en">Mediator</div>
+        <p class="result-tagline" id="result-tagline"></p>
+      </div>
+
+      <div class="result-section">
+        <h3>维度分析</h3>
+        <div id="dim-bars"></div>
+      </div>
+
+      <div class="result-section">
+        <h3>性格特点</h3>
+        <ul class="traits" id="traits"></ul>
+      </div>
+
+      <div class="result-section">
+        <h3>适合的领域</h3>
+        <div class="chips" id="chips"></div>
+      </div>
+
+      <div class="result-section">
+        <h3>代表人物</h3>
+        <p class="famous" id="famous"></p>
+      </div>
+
+      <div class="result-actions">
+        <button class="btn btn-primary" id="btn-copy">复制结果</button>
+        <button class="btn btn-ghost" id="btn-restart">重新测试</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
