@@ -1,5 +1,5 @@
 const $ = (id) => document.getElementById(id);
-const ASSET_VERSION = "20260811-6";
+const ASSET_VERSION = "20260811-7";
 const screens = {
   start: $("screen-start"),
   test: $("screen-test"),
@@ -107,14 +107,24 @@ function pickWinner(scores) {
 function finishTest() {
   const scores = computeScores();
   const winner = pickWinner(scores);
+  const portraitUrl = `${winner.image}${winner.image.includes("?") ? "&" : "?"}v=${ASSET_VERSION}`;
 
   const hero = $("result-hero");
   hero.style.background = `linear-gradient(135deg, ${winner.color}, ${winner.color2})`;
+  hero.style.backgroundImage = `linear-gradient(180deg, rgba(10, 12, 20, 0.16), rgba(10, 12, 20, 0.42)), url("${portraitUrl}")`;
+  hero.style.backgroundSize = "cover";
+  hero.style.backgroundPosition = "center center";
+  hero.style.backgroundRepeat = "no-repeat";
+  hero.style.backgroundBlendMode = "normal";
 
   const avatar = $("result-avatar");
   avatar.textContent = winner.name.charAt(0);
   avatar.classList.remove("has-image");
   avatar.style.background = `linear-gradient(135deg, ${winner.color}, ${winner.color2})`;
+  avatar.style.backgroundImage = `url("${portraitUrl}")`;
+  avatar.style.backgroundSize = "cover";
+  avatar.style.backgroundPosition = "center center";
+  avatar.style.backgroundRepeat = "no-repeat";
 
   const portrait = new Image();
   portrait.alt = winner.name;
@@ -136,7 +146,7 @@ function finishTest() {
     },
     { once: true }
   );
-  portrait.src = `${winner.image}${winner.image.includes("?") ? "&" : "?"}v=${ASSET_VERSION}`;
+  portrait.src = portraitUrl;
 
   $("result-name").textContent = winner.name;
   $("result-tagline").textContent = winner.tagline;
