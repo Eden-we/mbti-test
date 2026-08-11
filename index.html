@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MBTI 人格测试 · 在线测评</title>
-  <meta name="description" content="基于 MBTI 理论的 28 题在线人格测试，从四个维度测出你的 16 型人格。" />
+  <title>Black Souls 2 伴侣测试 · 在线测评</title>
+  <meta name="description" content="28 道选择题，从 12 位角色中测出与你最契合的 Black Souls 2 灵魂伴侣。" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -15,29 +15,22 @@
   </div>
 
   <main class="container">
-    <!-- 首页 -->
     <section id="screen-start" class="screen active">
-      <div class="badge">MBTI · 16 型人格</div>
-      <h1 class="hero-title">你是哪一种<span class="grad-text">人格</span>？</h1>
-      <p class="hero-sub">28 道选择题 · 约 5 分钟 · 从四个维度探索你的性格倾向</p>
+      <div class="badge">BLACK SOULS II · 伴侣测试</div>
+      <h1 class="hero-title">谁是你的<span class="grad-text">灵魂伴侣</span>？</h1>
+      <p class="hero-sub">28 道选择题 · 约 3 分钟 · 从 12 位角色中测出与你最契合的那位</p>
 
-      <div class="dim-grid">
-        <div class="dim-card"><div class="dim-pair" style="color:#f59e0b">E / I</div><div class="dim-name">能量来源</div></div>
-        <div class="dim-card"><div class="dim-pair" style="color:#8b5cf6">S / N</div><div class="dim-name">认知方式</div></div>
-        <div class="dim-card"><div class="dim-pair" style="color:#ec4899">T / F</div><div class="dim-name">决策方式</div></div>
-        <div class="dim-card"><div class="dim-pair" style="color:#14b8a6">J / P</div><div class="dim-name">生活方式</div></div>
-      </div>
+      <div class="char-grid" id="roster"></div>
 
       <div style="text-align:center">
         <button class="btn btn-primary btn-lg" id="btn-start">开始测试</button>
       </div>
-      <p class="disclaimer">结果仅供自我探索与娱乐参考，并非专业心理测评</p>
+      <p class="disclaimer">结果仅供娱乐参考，并非专业测评</p>
     </section>
 
-    <!-- 测试页 -->
     <section id="screen-test" class="screen">
       <div class="test-top">
-        <span class="dim-tag" id="q-dim">E / I</span>
+        <span class="dim-tag">BLACK SOULS II</span>
         <span class="counter" id="q-counter">1 / 28</span>
       </div>
       <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
@@ -51,33 +44,17 @@
       </div>
     </section>
 
-    <!-- 结果页 -->
     <section id="screen-result" class="screen">
       <div class="result-hero" id="result-hero">
-        <div class="result-letters" id="result-letters"></div>
-        <div class="result-name" id="result-name">调停者</div>
-        <div class="result-en" id="result-en">Mediator</div>
+        <div class="result-avatar" id="result-avatar">诺</div>
+        <div class="result-label">你的灵魂伴侣</div>
+        <div class="result-name" id="result-name">诺登</div>
         <p class="result-tagline" id="result-tagline"></p>
-      </div>
-
-      <div class="result-section">
-        <h3>维度分析</h3>
-        <div id="dim-bars"></div>
       </div>
 
       <div class="result-section">
         <h3>性格特点</h3>
         <ul class="traits" id="traits"></ul>
-      </div>
-
-      <div class="result-section">
-        <h3>适合的领域</h3>
-        <div class="chips" id="chips"></div>
-      </div>
-
-      <div class="result-section">
-        <h3>代表人物</h3>
-        <p class="famous" id="famous"></p>
       </div>
 
       <div class="result-actions">
