@@ -4,6 +4,8 @@ const screens = {
   test: $("screen-test"),
   result: $("screen-result"),
 };
+const OPT_PREFIXES = ["A", "B", "C", "D"];
+const CHARACTER_MAP = Object.fromEntries(CHARACTERS.map((character) => [character.name, character]));
 
 let answers = [];
 let current = 0;
@@ -23,21 +25,19 @@ function startTest() {
 
 function renderQuestion() {
   const q = QUESTIONS[current];
-  $("q-dim").textContent = q.dim;
   $("q-counter").textContent = `${current + 1} / ${QUESTIONS.length}`;
   $("progress-fill").style.width = `${((current + 1) / QUESTIONS.length) * 100}%`;
   $("q-text").textContent = q.text;
 
   const box = $("options");
   box.innerHTML = "";
-  OPTION_LABELS.forEach((label, i) => {
-    const value = i + 1;
+  q.options.forEach((opt, i) => {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "opt";
-    if (answers[current] === value) btn.classList.add("selected");
-    btn.innerHTML = `<span class="opt-num">${value}</span><span class="opt-label">${label}</span>`;
-    btn.addEventListener("click", () => selectOption(value, btn));
+    if (answers[current] === i) btn.classList.add("selected");
+    btn.innerHTML = `<span class="opt-num">${OPT_PREFIXES[i]}</span><span class="opt-label">${opt.label}</span>`;
+    btn.addEventListener("click", () => selectOption(i, btn));
     box.appendChild(btn);
   });
 
@@ -45,9 +45,9 @@ function renderQuestion() {
   $("btn-next").textContent = current === QUESTIONS.length - 1 ? "查看结果" : "下一题";
 }
 
-function selectOption(value, btn) {
-  if (answers[current] === value) return;
-  answers[current] = value;
+function selectOption(index, btn) {
+  if (answers[current] === index) return;
+  answers[current] = index;
   document.querySelectorAll(".opt").forEach((b) => b.classList.remove("selected"));
   btn.classList.add("selected");
   setTimeout(() => {
@@ -70,76 +70,83 @@ function prevQuestion() {
   }
 }
 
-function computeType() {
-  const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+function computeScores() {
+  const scores = {};
+  const counts = [0, 0, 0, 0];
+
   QUESTIONS.forEach((q, i) => {
-    if (answers[i] > 0) scores[q.pole] += answers[i];
+    const idx = answers[i];
+    if (idx < 0 || !q.options[idx]) return;
+    counts[idx] += 1;
   });
-  const pairs = [["E", "I"], ["S", "N"], ["T", "F"], ["J", "P"]];
-  const code = pairs.map(([a, b]) => (scores[a] >= scores[b] ? a : b)).join("");
-  const pcts = {};
-  pairs.forEach(([a, b]) => {
-    const total = scores[a] + scores[b] || 1;
-    pcts[a] = Math.round((scores[a] / total) * 100);
-    pcts[b] = 100 - pcts[a];
+
+  CHARACTERS.forEach((character) => {
+    const target = CHARACTER_TARGETS[character.name];
+    if (!target) {
+      scores[character.name] = 0;
+      return;
+    }
+
+    const distance =
+      Math.abs(counts[0] - target[0]) +
+      Math.abs(counts[1] - target[1]) +
+      Math.abs(counts[2] - target[2]) +
+      Math.abs(counts[3] - target[3]);
+    scores[character.name] = 100 - distance;
   });
-  return { code, pcts };
+
+  return scores;
+}
+
+function pickWinner(scores) {
+  const max = Math.max(...Object.values(scores));
+  return WIN_PRIORITY.map((name) => CHARACTER_MAP[name]).find((c) => scores[c.name] === max) || CHARACTERS[0];
 }
 
 function finishTest() {
-  const { code, pcts } = computeType();
-  const info = TYPES[code];
+  const scores = computeScores();
+  const winner = pickWinner(scores);
 
   const hero = $("result-hero");
-  const c1 = LETTER_COLORS[code[0]];
-  const c2 = LETTER_COLORS[code[2]];
-  hero.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
+  hero.style.background = `linear-gradient(135deg, ${winner.color}, ${winner.color2})`;
 
-  const letters = $("result-letters");
-  letters.innerHTML = "";
-  code.split("").forEach((ch) => {
-    const span = document.createElement("span");
-    span.textContent = ch;
-    letters.appendChild(span);
-  });
+  const avatar = $("result-avatar");
+  avatar.textContent = winner.name.charAt(0);
+  avatar.classList.remove("has-image");
+  avatar.style.background = `linear-gradient(135deg, ${winner.color}, ${winner.color2})`;
 
-  $("result-name").textContent = info.name;
-  $("result-en").textContent = info.en;
-  $("result-tagline").textContent = info.tagline;
-  $("traits").innerHTML = info.traits.map((t) => `<li>${t}</li>`).join("");
-  $("chips").innerHTML = info.fields.map((f) => `<span>${f}</span>`).join("");
-  $("famous").textContent = info.famous;
+  const portrait = new Image();
+  portrait.alt = winner.name;
+  portrait.loading = "eager";
+  portrait.decoding = "async";
+  portrait.addEventListener(
+    "load",
+    () => {
+      avatar.classList.add("has-image");
+      avatar.replaceChildren(portrait);
+    },
+    { once: true }
+  );
+  portrait.addEventListener(
+    "error",
+    () => {
+      avatar.classList.remove("has-image");
+    },
+    { once: true }
+  );
+  portrait.src = winner.image;
 
-  const dimMeta = { E: "外向", I: "内向", S: "实感", N: "直觉", T: "思考", F: "情感", J: "计划", P: "随性" };
-  const bars = $("dim-bars");
-  bars.innerHTML = "";
-  [["E", "I"], ["S", "N"], ["T", "F"], ["J", "P"]].forEach(([a, b], idx) => {
-    const row = document.createElement("div");
-    row.className = "dim-row";
-    row.innerHTML = `
-      <div class="dim-row-head">
-        <span>${a} ${dimMeta[a]} <span class="pct">${pcts[a]}%</span></span>
-        <span>${pcts[b]}% ${dimMeta[b]} ${b}</span>
-      </div>
-      <div class="dim-bar"><div class="left" data-w="${pcts[a]}" style="transition-delay:${idx * 0.12}s"></div></div>
-    `;
-    bars.appendChild(row);
-  });
+  $("result-name").textContent = winner.name;
+  $("result-tagline").textContent = winner.tagline;
+  $("traits").innerHTML = winner.traits.map((t) => `<li>${t}</li>`).join("");
 
   showScreen("result");
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      document.querySelectorAll(".dim-bar .left").forEach((el) => {
-        el.style.width = `${el.dataset.w}%`;
-      });
-    });
-  });
 }
 
 function copyResult() {
-  const { code } = computeType();
-  const info = TYPES[code];
-  const text = `我的 MBTI 人格类型是 ${code}「${info.name}」！\n${info.tagline}\n快来测测你是什么人格 →`;
+  const scores = computeScores();
+  const winner = pickWinner(scores);
+  const text = `我在 Black Souls 2 伴侣测试中，测出的灵魂伴侣是「${winner.name}」！\n${winner.tagline}\n快来测测你的灵魂伴侣是谁 →`;
   const done = () => showToast("结果已复制，去分享吧");
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
@@ -167,6 +174,36 @@ function showToast(msg) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
 }
+
+function renderRoster() {
+  const roster = $("roster");
+  if (!roster) return;
+  roster.innerHTML = "";
+  const fragment = document.createDocumentFragment();
+
+  ROSTER_ORDER.forEach((name, index) => {
+    const c = CHARACTER_MAP[name];
+    if (!c) return;
+
+    const card = document.createElement("article");
+    card.className = "char-card";
+    card.dataset.depth = String(Math.floor(index / 4));
+    card.style.setProperty("--accent", c.color);
+    card.style.setProperty("--accent2", c.color2);
+    card.title = c.name;
+    card.innerHTML = `
+      <img class="char-image" src="${c.image}" alt="${c.name}" loading="${index < 4 ? "eager" : "lazy"}" decoding="async" />
+      <div class="char-overlay"></div>
+      <div class="char-badge">${String(index + 1).padStart(2, "0")}</div>
+      <div class="char-label">${c.name}</div>
+    `;
+    fragment.appendChild(card);
+  });
+
+  roster.appendChild(fragment);
+}
+
+renderRoster();
 
 $("btn-start").addEventListener("click", startTest);
 $("btn-prev").addEventListener("click", prevQuestion);
