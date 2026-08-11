@@ -2,7 +2,7 @@
 
 一个纯静态的在线趣味测试网站：28 道选择题，答完后从 12 位角色中测出与你最契合的“灵魂伴侣”。
 
-在线访问: [https://eden-we.github.io/mbti-test/](https://eden-we.github.io/mbti-test/)
+在线访问: [https://eden-we.github.io/mbti-test/qa.html](https://eden-we.github.io/mbti-test/qa.html)
 
 ## 判定规则
 
@@ -13,7 +13,7 @@
 
 ## 本地运行
 
-直接用浏览器打开 `index.html` 即可，或启动本地服务：
+直接用浏览器打开 `qa.html` 即可，或启动本地服务：
 
 ```powershell
 cd C:/Users/99302/Desktop/mbti-test
@@ -36,7 +36,8 @@ python -m http.server 8000
 
 ## 文件结构
 
-- `index.html` — 页面结构（首页 / 测试 / 结果三个界面）
+- `index.html` — 根入口跳转页
+- `qa.html` — 新的稳定入口页（推荐打开这个）
 - `style.css` — 全部样式与动画
 - `data.js` — 题目库 `QUESTIONS`、角色数据 `CHARACTERS`、目标分布 `CHARACTER_TARGETS`、优先级 `WIN_PRIORITY`
 - `app.js` — 答题逻辑、计分、结果渲染
