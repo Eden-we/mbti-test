@@ -1,4 +1,5 @@
 const $ = (id) => document.getElementById(id);
+const ASSET_VERSION = "20260811-2";
 const screens = {
   start: $("screen-start"),
   test: $("screen-test"),
@@ -135,7 +136,7 @@ function finishTest() {
     },
     { once: true }
   );
-  portrait.src = winner.image;
+  portrait.src = `${winner.image}${winner.image.includes("?") ? "&" : "?"}v=${ASSET_VERSION}`;
 
   $("result-name").textContent = winner.name;
   $("result-tagline").textContent = winner.tagline;
