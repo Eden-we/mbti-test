@@ -118,6 +118,7 @@ function finishTest() {
   const portrait = new Image();
   portrait.alt = winner.name;
   portrait.loading = "eager";
+  portrait.fetchPriority = "high";
   portrait.decoding = "async";
   portrait.addEventListener(
     "load",
@@ -190,12 +191,14 @@ function renderRoster() {
     card.dataset.depth = String(Math.floor(index / 4));
     card.style.setProperty("--accent", c.color);
     card.style.setProperty("--accent2", c.color2);
+    card.style.background = `linear-gradient(145deg, ${c.color}, ${c.color2})`;
     card.title = c.name;
     card.innerHTML = `
-      <img class="char-image" src="${c.image}" alt="${c.name}" loading="${index < 4 ? "eager" : "lazy"}" decoding="async" />
-      <div class="char-overlay"></div>
       <div class="char-badge">${String(index + 1).padStart(2, "0")}</div>
-      <div class="char-label">${c.name}</div>
+      <div class="char-card-copy">
+        <div class="char-label">${c.name}</div>
+        <div class="char-mini">${c.tagline}</div>
+      </div>
     `;
     fragment.appendChild(card);
   });
