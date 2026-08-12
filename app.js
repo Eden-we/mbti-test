@@ -1,5 +1,5 @@
 const $ = (id) => document.getElementById(id);
-const ASSET_VERSION = "20260811-7";
+const ASSET_VERSION = "20260812-1";
 const screens = {
   start: $("screen-start"),
   test: $("screen-test"),
@@ -10,6 +10,7 @@ const CHARACTER_MAP = Object.fromEntries(CHARACTERS.map((character) => [characte
 
 let answers = [];
 let current = 0;
+let portraitWarmupStarted = false;
 
 function showScreen(name) {
   Object.values(screens).forEach((s) => s.classList.remove("active"));
@@ -20,8 +21,21 @@ function showScreen(name) {
 function startTest() {
   answers = new Array(QUESTIONS.length).fill(-1);
   current = 0;
+  warmPortraits();
   showScreen("test");
   renderQuestion();
+}
+
+function warmPortraits() {
+  if (portraitWarmupStarted) return;
+  portraitWarmupStarted = true;
+
+  CHARACTERS.forEach((character) => {
+    const src = `${character.image}${character.image.includes("?") ? "&" : "?"}v=${ASSET_VERSION}`;
+    const img = new Image();
+    img.decoding = "async";
+    img.src = src;
+  });
 }
 
 function renderQuestion() {
@@ -110,42 +124,11 @@ function finishTest() {
   const portraitUrl = `${winner.image}${winner.image.includes("?") ? "&" : "?"}v=${ASSET_VERSION}`;
 
   const hero = $("result-hero");
-  hero.style.background = `linear-gradient(135deg, ${winner.color}, ${winner.color2})`;
-  hero.style.backgroundImage = `linear-gradient(180deg, rgba(10, 12, 20, 0.16), rgba(10, 12, 20, 0.42)), url("${portraitUrl}")`;
-  hero.style.backgroundSize = "cover";
-  hero.style.backgroundPosition = "center center";
-  hero.style.backgroundRepeat = "no-repeat";
-  hero.style.backgroundBlendMode = "normal";
+  hero.style.setProperty("--hero-accent", winner.color);
+  hero.style.setProperty("--hero-accent2", winner.color2);
 
-  const avatar = $("result-avatar");
-  avatar.textContent = winner.name.charAt(0);
-  avatar.classList.remove("has-image");
-  avatar.style.background = `linear-gradient(135deg, ${winner.color}, ${winner.color2})`;
-  avatar.style.backgroundImage = `url("${portraitUrl}")`;
-  avatar.style.backgroundSize = "cover";
-  avatar.style.backgroundPosition = "center center";
-  avatar.style.backgroundRepeat = "no-repeat";
-
-  const portrait = new Image();
+  const portrait = $("result-portrait");
   portrait.alt = winner.name;
-  portrait.loading = "eager";
-  portrait.fetchPriority = "high";
-  portrait.decoding = "async";
-  portrait.addEventListener(
-    "load",
-    () => {
-      avatar.classList.add("has-image");
-      avatar.replaceChildren(portrait);
-    },
-    { once: true }
-  );
-  portrait.addEventListener(
-    "error",
-    () => {
-      avatar.classList.remove("has-image");
-    },
-    { once: true }
-  );
   portrait.src = portraitUrl;
 
   $("result-name").textContent = winner.name;
