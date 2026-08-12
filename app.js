@@ -1,5 +1,5 @@
 const $ = (id) => document.getElementById(id);
-const ASSET_VERSION = "20260812-1";
+const ASSET_VERSION = "20260812-2";
 const screens = {
   start: $("screen-start"),
   test: $("screen-test"),
