@@ -1,5 +1,5 @@
 const $ = (id) => document.getElementById(id);
-const ASSET_VERSION = "20260812-2";
+const ASSET_VERSION = "20260812-4";
 const screens = {
   start: $("screen-start"),
   test: $("screen-test"),
@@ -10,7 +10,6 @@ const CHARACTER_MAP = Object.fromEntries(CHARACTERS.map((character) => [characte
 
 let answers = [];
 let current = 0;
-let portraitWarmupStarted = false;
 
 function showScreen(name) {
   Object.values(screens).forEach((s) => s.classList.remove("active"));
@@ -21,21 +20,8 @@ function showScreen(name) {
 function startTest() {
   answers = new Array(QUESTIONS.length).fill(-1);
   current = 0;
-  warmPortraits();
   showScreen("test");
   renderQuestion();
-}
-
-function warmPortraits() {
-  if (portraitWarmupStarted) return;
-  portraitWarmupStarted = true;
-
-  CHARACTERS.forEach((character) => {
-    const src = `${character.image}${character.image.includes("?") ? "&" : "?"}v=${ASSET_VERSION}`;
-    const img = new Image();
-    img.decoding = "async";
-    img.src = src;
-  });
 }
 
 function renderQuestion() {
@@ -121,7 +107,6 @@ function pickWinner(scores) {
 function finishTest() {
   const scores = computeScores();
   const winner = pickWinner(scores);
-  const portraitUrl = `${winner.image}${winner.image.includes("?") ? "&" : "?"}v=${ASSET_VERSION}`;
 
   const hero = $("result-hero");
   hero.style.setProperty("--hero-accent", winner.color);
@@ -129,7 +114,7 @@ function finishTest() {
 
   const portrait = $("result-portrait");
   portrait.alt = winner.name;
-  portrait.src = portraitUrl;
+  portrait.src = winner.imageData || `${winner.image}${winner.image.includes("?") ? "&" : "?"}v=${ASSET_VERSION}`;
 
   $("result-name").textContent = winner.name;
   $("result-tagline").textContent = winner.tagline;
