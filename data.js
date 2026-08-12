@@ -170,18 +170,18 @@ const QUESTIONS = [
 ];
 
 const CHARACTERS = [
-  { name: "诺登", image: "assets/blacksouls2/34e2abde05adbb44731dabe24ab1ad36_750.png", color: "#4f46e5", color2: "#7c3aed", tagline: "沉稳可靠的守护者，话不多，但值得托付。", traits: ["安静而有担当，说到做到", "情绪稳定，是可靠的依靠", "重视承诺，不会轻易动摇"] },
-  { name: "假海龟", image: "assets/blacksouls2/dd51b492b60e4ae0c2be746f7ac3f25d.jpeg", color: "#0d9488", color2: "#134e4a", tagline: "慢悠悠的温柔派，看似迷糊，其实心思细腻。", traits: ["温和耐心，从不催促别人", "共情力强，善于倾听", "慢热但真诚，认定了就不放手"] },
-  { name: "渡渡", image: "assets/blacksouls2/172730f840a9e75b7ce30ad6d03b5380.jpeg", color: "#0284c7", color2: "#0c4a6e", tagline: "元气满满的乐天派，走到哪儿都带着笑声。", traits: ["乐观开朗，感染力十足", "直率单纯，不藏着掖着", "偶尔冒失，却总能把气氛变轻松"] },
-  { name: "柴郡猫", image: "assets/blacksouls2/d2d405686ba5aa930e4858f30f74d6c9.jpeg", color: "#a855f7", color2: "#6b21a8", tagline: "神出鬼没的谜语人，笑容背后藏着深意。", traits: ["神秘有趣，永远猜不透", "聪明敏锐，看人很准", "喜欢保持距离，却始终在意着你"] },
-  { name: "蕾克", image: "assets/blacksouls2/1bd86dea578df910bbc4ac24ac65fd95_750.png", color: "#0891b2", color2: "#155e75", tagline: "冷静独立的实干家，外冷内热，值得信赖。", traits: ["理性果断，行动力强", "外冷内热，情感藏得很深", "目标明确，关键时刻靠得住"] },
-  { name: "比尔", image: "assets/blacksouls2/e1c9f8195c40504fdfe86f14d5ec7f38.jpeg", color: "#d97706", color2: "#92400e", tagline: "嘴硬心软的行动派，嘴上嫌弃，手上却没停过。", traits: ["务实能干，擅长解决实际问题", "表面冷淡，其实很护短", "嘴上不饶人，关键时刻最可靠"] },
-  { name: "普利凯特", image: "assets/blacksouls2/9a91945357b2769a39ff41df51731b98_750.png", color: "#059669", color2: "#047857", tagline: "轻盈灵动的小精灵，走到哪里都讨人喜欢。", traits: ["活泼灵巧，人缘极好", "细心体贴，总在照顾别人", "乐观随和，适应能力很强"] },
-  { name: "梅贝尔", image: "assets/blacksouls2/Screenshot_2026-08-11-16-01-24-107_ai.x.grok_1786.jpg", color: "#e11d48", color2: "#9f1239", tagline: "温柔细腻的共情者，能接住你所有的情绪。", traits: ["情感丰富，共情力强", "温柔包容，让人安心", "重视关系，愿意默默付出"] },
-  { name: "希夏", image: "assets/blacksouls2/266a6afff2fea3304c76d63230bedbf4.jpeg", color: "#7c3aed", color2: "#4c1d95", tagline: "安静神秘的存在，有自己的小小世界。", traits: ["内敛安静，不轻易展露内心", "观察力强，心思细腻", "需要自己的空间，也尊重你的"] },
-  { name: "班达斯奈奇", image: "assets/blacksouls2/7a171a6cb0f0e61c0fe00f3d7b686ff7.jpeg", color: "#ea580c", color2: "#7c2d12", tagline: "野性难驯的行动派，想到就做，绝不拖沓。", traits: ["直来直往，讨厌绕弯子", "精力旺盛，行动力惊人", "自由奔放，不喜欢被束缚"] },
-  { name: "贾布加布", image: "assets/blacksouls2/6dbce6dfb7f8ebfc866ca6556a9a97ee.jpeg", color: "#65a30d", color2: "#3f6212", tagline: "古怪又热闹的活宝，永远猜不到他下一步。", traits: ["古灵精怪，脑洞清奇", "爱热闹，总能带来惊喜", "看似不着调，其实很重感情"] },
-  { name: "贾巴沃克", image: "assets/blacksouls2/c2289a38dc28e3002b0e4c6d32781d0c.jpeg", color: "#be123c", color2: "#4c0519", tagline: "强大而神秘的存在，令人敬畏，又忍不住靠近。", traits: ["气场强大，让人难以忽视", "深藏不露，心思难测", "认定的事，会贯彻到底"] },
+  { name: "诺登", image: "assets/blacksouls2/thumbs/34e2abde05adbb44731dabe24ab1ad36_750.webp", color: "#4f46e5", color2: "#7c3aed", tagline: "沉稳可靠的守护者，话不多，但值得托付。", traits: ["安静而有担当，说到做到", "情绪稳定，是可靠的依靠", "重视承诺，不会轻易动摇"] },
+  { name: "假海龟", image: "assets/blacksouls2/thumbs/dd51b492b60e4ae0c2be746f7ac3f25d.webp", color: "#0d9488", color2: "#134e4a", tagline: "慢悠悠的温柔派，看似迷糊，其实心思细腻。", traits: ["温和耐心，从不催促别人", "共情力强，善于倾听", "慢热但真诚，认定了就不放手"] },
+  { name: "渡渡", image: "assets/blacksouls2/thumbs/172730f840a9e75b7ce30ad6d03b5380.webp", color: "#0284c7", color2: "#0c4a6e", tagline: "元气满满的乐天派，走到哪儿都带着笑声。", traits: ["乐观开朗，感染力十足", "直率单纯，不藏着掖着", "偶尔冒失，却总能把气氛变轻松"] },
+  { name: "柴郡猫", image: "assets/blacksouls2/thumbs/d2d405686ba5aa930e4858f30f74d6c9.webp", color: "#a855f7", color2: "#6b21a8", tagline: "神出鬼没的谜语人，笑容背后藏着深意。", traits: ["神秘有趣，永远猜不透", "聪明敏锐，看人很准", "喜欢保持距离，却始终在意着你"] },
+  { name: "蕾克", image: "assets/blacksouls2/thumbs/1bd86dea578df910bbc4ac24ac65fd95_750.webp", color: "#0891b2", color2: "#155e75", tagline: "冷静独立的实干家，外冷内热，值得信赖。", traits: ["理性果断，行动力强", "外冷内热，情感藏得很深", "目标明确，关键时刻靠得住"] },
+  { name: "比尔", image: "assets/blacksouls2/thumbs/e1c9f8195c40504fdfe86f14d5ec7f38.webp", color: "#d97706", color2: "#92400e", tagline: "嘴硬心软的行动派，嘴上嫌弃，手上却没停过。", traits: ["务实能干，擅长解决实际问题", "表面冷淡，其实很护短", "嘴上不饶人，关键时刻最可靠"] },
+  { name: "普利凯特", image: "assets/blacksouls2/thumbs/9a91945357b2769a39ff41df51731b98_750.webp", color: "#059669", color2: "#047857", tagline: "轻盈灵动的小精灵，走到哪里都讨人喜欢。", traits: ["活泼灵巧，人缘极好", "细心体贴，总在照顾别人", "乐观随和，适应能力很强"] },
+  { name: "梅贝尔", image: "assets/blacksouls2/thumbs/Screenshot_2026-08-11-16-01-24-107_ai.x.grok_1786.webp", color: "#e11d48", color2: "#9f1239", tagline: "温柔细腻的共情者，能接住你所有的情绪。", traits: ["情感丰富，共情力强", "温柔包容，让人安心", "重视关系，愿意默默付出"] },
+  { name: "希夏", image: "assets/blacksouls2/thumbs/266a6afff2fea3304c76d63230bedbf4.webp", color: "#7c3aed", color2: "#4c1d95", tagline: "安静神秘的存在，有自己的小小世界。", traits: ["内敛安静，不轻易展露内心", "观察力强，心思细腻", "需要自己的空间，也尊重你的"] },
+  { name: "班达斯奈奇", image: "assets/blacksouls2/thumbs/7a171a6cb0f0e61c0fe00f3d7b686ff7.webp", color: "#ea580c", color2: "#7c2d12", tagline: "野性难驯的行动派，想到就做，绝不拖沓。", traits: ["直来直往，讨厌绕弯子", "精力旺盛，行动力惊人", "自由奔放，不喜欢被束缚"] },
+  { name: "贾布加布", image: "assets/blacksouls2/thumbs/6dbce6dfb7f8ebfc866ca6556a9a97ee.webp", color: "#65a30d", color2: "#3f6212", tagline: "古怪又热闹的活宝，永远猜不到他下一步。", traits: ["古灵精怪，脑洞清奇", "爱热闹，总能带来惊喜", "看似不着调，其实很重感情"] },
+  { name: "贾巴沃克", image: "assets/blacksouls2/thumbs/c2289a38dc28e3002b0e4c6d32781d0c.webp", color: "#be123c", color2: "#4c0519", tagline: "强大而神秘的存在，令人敬畏，又忍不住靠近。", traits: ["气场强大，让人难以忽视", "深藏不露，心思难测", "认定的事，会贯彻到底"] },
 ];
 
 const ROSTER_ORDER = [
